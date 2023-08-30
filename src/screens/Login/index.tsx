@@ -8,29 +8,32 @@ import {
 } from 'react-native';
 import Button from '../../components/Button';
 import styles from './styles';
+import {toast} from '../../utils/ToastHelper';
+import {useAppDispatch} from '../../hooks/useRedux';
+import * as generalAct from '../../redux/slices/GeneralState';
 
 const LoginScreen = () => {
+  const dispatch = useAppDispatch();
   const [state, setState] = useState({
     userName: '',
     password: '',
   });
 
-  const [status, setStatus] = useState('no login');
-
   const onSubmitLogin = useCallback(() => {
+    dispatch(generalAct.setStatusModalGlobal(true));
     try {
       if (state.userName === 'admin' && state.password === 'admin') {
-        setStatus('login successful');
+        toast('login successful');
         return true;
       } else {
-        setStatus('wrong login');
+        toast('wrong login', 'error');
         return false;
       }
     } catch (e) {
-      setStatus('wrong login');
+      toast('wrong login', 'error');
       return false;
     }
-  }, [state]);
+  }, [dispatch, state.password, state.userName]);
 
   return (
     <KeyboardAvoidingView
@@ -56,6 +59,7 @@ const LoginScreen = () => {
         <View>
           <Text>Password</Text>
           <TextInput
+            secureTextEntry={true}
             placeholder="Password"
             testID="passwordText"
             value={state.password}
@@ -70,7 +74,6 @@ const LoginScreen = () => {
           title={'Login'}
           onPress={() => onSubmitLogin()}
         />
-        <Text>{status} </Text>
       </View>
     </KeyboardAvoidingView>
   );

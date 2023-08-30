@@ -4,15 +4,25 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
-    "ios": "react-native run-ios",
+    "ios": "react-native run-ios --port 8088 --simulator=\"iPhone 13 Pro\"",
     "lint": "eslint .",
-    "start": "react-native start",
+    "start": "react-native start --port 8088",
     "test": "jest",
-    "open-xcode": "xed -b ios"
+    "open-xcode": "xed -b ios",
+    "preinstall": "node ./scripts/pre-install",
+    "postinstall": "node ./scripts/post-install",
+    "pod-install": "cd ios && pod install && cd ../",
+    "clean:android": "cd android && ./gradlew clean && cd ../"
   },
   "dependencies": {
+    "@react-navigation/native": "^6.1.7",
+    "@react-navigation/native-stack": "^6.9.13",
+    "@react-navigation/stack": "^6.3.17",
     "react": "18.2.0",
-    "react-native": "0.72.4"
+    "react-native": "0.72.4",
+    "react-native-gesture-handler": "^2.12.1",
+    "react-native-safe-area-context": "^4.7.1",
+    "react-native-screens": "^3.24.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

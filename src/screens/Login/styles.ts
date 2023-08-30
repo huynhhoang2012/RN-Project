@@ -8,12 +8,12 @@ export default StyleSheet.create({
   body: {
     flex: 1,
     justifyContent: 'center',
-    paddingHorizontal: 10,
+    paddingHorizontal: 20,
   },
   textTitle: {
     fontSize: 24,
     fontWeight: '700',
-    marginBottom: 30,
+    marginBottom: 20,
   },
   inputLogin: {
     borderColor: BORDER,
@@ -24,18 +24,6 @@ export default StyleSheet.create({
     paddingVertical: 10,
     fontSize: 14,
     fontWeight: '400',
-  },
-  buttonLogin: {
-    backgroundColor: BACKGROUND_BUTTON,
-    paddingHorizontal: 10,
-    paddingVertical: 10,
-    borderRadius: 6,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  textButton: {
-    color: WHITE,
-    fontSize: 16,
-    fontWeight: '600',
+    marginTop: 4,
   },
 });

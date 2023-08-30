@@ -1,5 +1,12 @@
 import React, {useCallback, useState} from 'react';
-import {Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {
+  KeyboardAvoidingView,
+  Platform,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
+import Button from '../../components/Button';
 import styles from './styles';
 
 const LoginScreen = () => {
@@ -8,19 +15,36 @@ const LoginScreen = () => {
     password: '',
   });
 
+  const [status, setStatus] = useState('no login');
+
   const onSubmitLogin = useCallback(() => {
     try {
-      if (state.userName === 'admin' && state.password === '123456') {
+      if (state.userName === 'admin' && state.password === 'admin') {
+        setStatus('login successful');
+        return true;
+      } else {
+        setStatus('wrong login');
+        return false;
       }
-    } catch (e) {}
+    } catch (e) {
+      setStatus('wrong login');
+      return false;
+    }
   }, [state]);
+
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.container}>
       <View style={styles.body}>
-        <Text style={styles.textTitle}>Login Screen</Text>
+        <Text testID={'testText'} style={styles.textTitle}>
+          Login Screen
+        </Text>
         <View>
           <Text>User name</Text>
           <TextInput
+            placeholder="Username"
+            testID="userNameText"
             value={state.userName}
             style={styles.inputLogin}
             onChangeText={e => {
@@ -32,6 +56,8 @@ const LoginScreen = () => {
         <View>
           <Text>Password</Text>
           <TextInput
+            placeholder="Password"
+            testID="passwordText"
             value={state.password}
             style={styles.inputLogin}
             onChangeText={e => {
@@ -39,14 +65,14 @@ const LoginScreen = () => {
             }}
           />
         </View>
-
-        <TouchableOpacity
-          style={styles.buttonLogin}
-          onPress={() => onSubmitLogin()}>
-          <Text style={styles.textButton}>Login</Text>
-        </TouchableOpacity>
+        <Button
+          testID="buttonLogin"
+          title={'Login'}
+          onPress={() => onSubmitLogin()}
+        />
+        <Text>{status} </Text>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 

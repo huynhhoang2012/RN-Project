@@ -3,6 +3,7 @@ import {Modal, Text, TouchableOpacity, View} from 'react-native';
 import {useAppDispatch, useAppSelector} from '../../hooks/useRedux';
 import * as generalAct from '../../redux/slices/GeneralState';
 import styles from './styles';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const GlobalModal = () => {
   const dispatch = useAppDispatch();
@@ -22,6 +23,7 @@ const GlobalModal = () => {
           onPress={() => turnOffModal()}
         />
         <View style={styles.modalView}>
+          <AntDesign name="closecircle" size={16} />
           <Text>Global Modal</Text>
         </View>
       </View>

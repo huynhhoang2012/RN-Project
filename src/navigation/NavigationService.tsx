@@ -7,7 +7,6 @@ export function goBack() {
 }
 
 export function navigate(name: string, params?: Record<string, any>) {
-  console.log(navigationRef.isReady());
   if (navigationRef.isReady()) {
     navigationRef.navigate(name, params);
   }

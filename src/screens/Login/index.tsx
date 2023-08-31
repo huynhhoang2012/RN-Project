@@ -71,9 +71,10 @@ const LoginScreen = () => {
         </View>
         <Button
           testID="buttonLogin"
-          title={'Login'}
           onPress={() => onSubmitLogin()}
-        />
+          style={styles.buttonLogin}>
+          <Text style={styles.titleButtonLogin}>Login</Text>
+        </Button>
       </View>
     </KeyboardAvoidingView>
   );

@@ -26,4 +26,12 @@ export default StyleSheet.create({
     fontWeight: '400',
     marginTop: 4,
   },
+  buttonLogin: {
+    backgroundColor: BACKGROUND_BUTTON,
+  },
+  titleButtonLogin: {
+    color: WHITE,
+    fontSize: 16,
+    fontWeight: '600',
+  },
 });

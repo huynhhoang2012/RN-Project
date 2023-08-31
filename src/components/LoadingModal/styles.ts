@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {BACKGROUND_MODAL, WHITE} from '../../assets/colors';
+import {BACKGROUND_MODAL} from '../../assets/colors';
 
 export default StyleSheet.create({
   container: {
@@ -10,7 +10,6 @@ export default StyleSheet.create({
   },
   modalView: {
     width: '50%',
-    backgroundColor: WHITE,
     borderRadius: 6,
     shadowColor: '#000',
     shadowOffset: {
@@ -25,5 +24,9 @@ export default StyleSheet.create({
     minHeight: 200,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  sizeLoading: {
+    width: 100,
+    height: 100,
   },
 });

@@ -11,9 +11,10 @@ const Header = (props: Props) => {
   const {title} = props;
 
   return (
-    <View
-      style={[styles.container, {marginTop: useSafeAreaInsetsCustom().top}]}>
-      <Text style={styles.title}>{title || 'Header'}</Text>
+    <View style={[styles.container]}>
+      <Text style={[styles.title, {marginTop: useSafeAreaInsetsCustom().top}]}>
+        {title || 'Header'}
+      </Text>
     </View>
   );
 };

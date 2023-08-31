@@ -11,6 +11,7 @@ import styles from './styles';
 import {toast} from '../../utils/ToastHelper';
 import {useAppDispatch} from '../../hooks/useRedux';
 import * as generalAct from '../../redux/slices/GeneralState';
+import {navigate} from '../../navigation/NavigationService';
 
 const LoginScreen = () => {
   const dispatch = useAppDispatch();
@@ -20,19 +21,22 @@ const LoginScreen = () => {
   });
 
   const onSubmitLogin = useCallback(() => {
-    dispatch(generalAct.setStatusModalGlobal(true));
-    try {
-      if (state.userName === 'admin' && state.password === 'admin') {
-        toast('login successful');
-        return true;
-      } else {
+    dispatch(generalAct.setLoading(true));
+    setTimeout(() => {
+      try {
+        if (state.userName === 'admin' && state.password === 'admin') {
+          toast('login successful');
+          dispatch(generalAct.setLoading(false));
+          navigate('BottomTab');
+        } else {
+          toast('wrong login', 'error');
+          dispatch(generalAct.setLoading(false));
+        }
+      } catch (e) {
         toast('wrong login', 'error');
-        return false;
+        dispatch(generalAct.setLoading(false));
       }
-    } catch (e) {
-      toast('wrong login', 'error');
-      return false;
-    }
+    }, 5000);
   }, [dispatch, state.password, state.userName]);
 
   return (

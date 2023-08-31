@@ -1,16 +1,16 @@
+/* eslint-disable react/react-in-jsx-scope */
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import LottieView from 'lottie-react-native';
+import {Platform, StyleSheet, Text, View} from 'react-native';
+import {WHITE} from '../assets/colors';
 import HomeScreen from '../screens/Home';
 import SettingsScreen from '../screens/Setting';
-import {BACKGROUND_BUTTON, WHITE} from '../assets/colors';
-import {Platform, StyleSheet, Text, View} from 'react-native';
-import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import LottieView from 'lottie-react-native';
 
 const Tab = createBottomTabNavigator();
 
 function BottomTab() {
   return (
+    // eslint-disable-next-line react/react-in-jsx-scope
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
@@ -20,6 +20,7 @@ function BottomTab() {
         name="Home"
         component={HomeScreen}
         options={{
+          // eslint-disable-next-line react/no-unstable-nested-components
           tabBarIcon: ({focused}) => (
             <View style={styles.viewButtonTab}>
               <View style={styles.viewIcon}>
@@ -41,6 +42,7 @@ function BottomTab() {
         name="Settings"
         component={SettingsScreen}
         options={{
+          // eslint-disable-next-line react/no-unstable-nested-components
           tabBarIcon: ({focused}) => (
             <View style={styles.viewButtonTab}>
               <View style={styles.viewIcon}>

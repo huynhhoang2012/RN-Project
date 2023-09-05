@@ -6,6 +6,7 @@ import LoadingModal from '../components/LoadingModal';
 import LoginScreen from '../screens/Login';
 import BottomTab from './BottomTabContainer';
 import {navigationRef} from './NavigationService';
+import QRCodeScanner from '../screens/QRCodeScanner';
 
 const Stack = createStackNavigator();
 
@@ -20,6 +21,7 @@ function MyStack() {
           }}>
           <Stack.Screen name="BottomTab" component={BottomTab} />
           <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="QRCodeScanner" component={QRCodeScanner} />
         </Stack.Navigator>
       </NavigationContainer>
       <GlobalModal />

@@ -17,7 +17,7 @@ type typeListButtonSetting = {
 const SettingsScreen = () => {
   const listButtonSetting: typeListButtonSetting[] = [
     {
-      title: 'QR Code Scanner',
+      title: 'QR Code',
       screen: 'QRCodeScanner',
       icon: <MaterialCommunityIcons name="qrcode-scan" size={16} />,
     },

@@ -79,6 +79,9 @@ target 'RN_Project' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+  #/react-native-fs
+  pod 'RNFS', :path => '../node_modules/react-native-fs'
+
   target 'RN_ProjectTests' do
     inherit! :complete
     # Pods for testing

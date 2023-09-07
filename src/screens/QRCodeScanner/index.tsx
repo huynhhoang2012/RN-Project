@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {Text, View} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
-import QRCode from 'react-native-qrcode-svg';
+import QRCode, {QRCodeProps} from 'react-native-qrcode-svg';
 import Feather from 'react-native-vector-icons/Feather';
 import {WHITE} from '../../assets/colors';
 import Button from '../../components/Button';
@@ -14,6 +14,7 @@ const tabs = [
 ];
 
 const QRCodeScanner = () => {
+  const qrGeneretorRef = useRef<QRCodeProps | Readonly<QRCodeProps>>();
   const [tabActive, setTabActive] = useState(tabs[0]);
   const [valueGenerator, setValueGenerator] = useState<string>('');
   const [isGenerator, setIsGenerator] = useState<boolean>(false);
@@ -43,6 +44,26 @@ const QRCodeScanner = () => {
     );
   };
 
+  // const saveQrCodeToGallery = () => {
+  //   qrGeneretorRef?.current?.toDataURL(data => {
+  //     RNFs.writeFile(
+  //       RNFS.CachesDirectoryPath + '/some-name.png',
+  //       data,
+  //       'base64',
+  //     )
+  //       .then(success => {
+  //         return CameraRoll.saveToCameraRoll(
+  //           RNFS.CachesDirectoryPath + '/some-name.png',
+  //           'photo',
+  //         );
+  //       })
+  //       .then(() => {
+  //         this.setState({busy: false, imageSaved: true});
+  //         ToastAndroid.show('Saved to gallery !!', ToastAndroid.SHORT);
+  //       });
+  //   });
+  // };
+
   const _renderContent = () => {
     switch (tabActive.type) {
       case 'scanner':
@@ -67,19 +88,27 @@ const QRCodeScanner = () => {
                 <Text style={styles.textBtnGenerator}>Generator</Text>
               </Button>
             </View>
-            <View style={styles.bodyQRGenerator}>
-              {valueGenerator.length > 0 ? (
-                <QRCode size={300} value={valueGenerator} />
-              ) : (
-                <></>
-              )}
-            </View>
-            <Button style={styles.btnSaveQRCode}>
-              <Feather name="download" size={20} />
-              <Text style={{color: WHITE, fontSize: 14, marginLeft: 6}}>
-                Save to gallery{' '}
-              </Text>
-            </Button>
+            {isGenerator && (
+              <>
+                <View style={styles.bodyQRGenerator}>
+                  {valueGenerator.length > 0 ? (
+                    <QRCode
+                      ref={qrGeneretorRef}
+                      size={300}
+                      value={valueGenerator}
+                    />
+                  ) : (
+                    <></>
+                  )}
+                </View>
+                <Button style={styles.btnSaveQRCode}>
+                  <Feather name="download" size={20} color={WHITE} />
+                  <Text style={{color: WHITE, fontSize: 14, marginLeft: 6}}>
+                    Save to gallery{' '}
+                  </Text>
+                </Button>
+              </>
+            )}
           </View>
         );
 

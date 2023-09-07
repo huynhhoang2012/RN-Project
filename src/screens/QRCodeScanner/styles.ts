@@ -41,8 +41,8 @@ export default StyleSheet.create({
   },
   bodyContent: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    // justifyContent: 'center',
+    // alignItems: 'center',
     width: '100%',
   },
   viewInputGenerator: {

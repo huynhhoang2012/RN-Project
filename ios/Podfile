@@ -82,6 +82,11 @@ target 'RN_Project' do
   #/react-native-fs
   pod 'RNFS', :path => '../node_modules/react-native-fs'
 
+  #/react-native-firebase
+  pod 'Firebase', :modular_headers => true
+  pod 'FirebaseCoreInternal', :modular_headers => true
+  pod 'GoogleUtilities', :modular_headers => true
+
   target 'RN_ProjectTests' do
     inherit! :complete
     # Pods for testing

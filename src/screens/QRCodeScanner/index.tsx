@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react';
-import {Text, View} from 'react-native';
+import {Keyboard, Text, View} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
 import QRCode, {QRCodeProps} from 'react-native-qrcode-svg';
 import Feather from 'react-native-vector-icons/Feather';
@@ -84,7 +84,10 @@ const QRCodeScanner = () => {
               />
               <Button
                 style={styles.buttonGenerator}
-                onPress={() => setIsGenerator(true)}>
+                onPress={() => {
+                  Keyboard.dismiss();
+                  setIsGenerator(true);
+                }}>
                 <Text style={styles.textBtnGenerator}>Generator</Text>
               </Button>
             </View>

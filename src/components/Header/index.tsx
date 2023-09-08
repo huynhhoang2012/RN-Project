@@ -5,6 +5,7 @@ import {useSafeAreaInsetsCustom} from '../../hooks/useSafeAreaInsetsCustom';
 import {goBack} from '../../navigation/NavigationService';
 import Button from '../Button';
 import styles from './styles';
+import {checkPlatform} from '../../utils/func';
 
 type Props = {
   title?: string;

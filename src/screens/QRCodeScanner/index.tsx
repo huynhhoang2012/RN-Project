@@ -14,7 +14,7 @@ const tabs = [
 ];
 
 const QRCodeScanner = () => {
-  const qrGeneretorRef = useRef<QRCodeProps | Readonly<QRCodeProps>>();
+  const qrGeneretorRef = useRef<any>();
   const [tabActive, setTabActive] = useState(tabs[0]);
   const [valueGenerator, setValueGenerator] = useState<string>('');
   const [isGenerator, setIsGenerator] = useState<boolean>(false);
@@ -45,7 +45,7 @@ const QRCodeScanner = () => {
   };
 
   // const saveQrCodeToGallery = () => {
-  //   qrGeneretorRef?.current?.toDataURL(data => {
+  //   qrGeneretorRef.toDataURL(data => {
   //     RNFs.writeFile(
   //       RNFS.CachesDirectoryPath + '/some-name.png',
   //       data,
@@ -96,7 +96,7 @@ const QRCodeScanner = () => {
                 <View style={styles.bodyQRGenerator}>
                   {valueGenerator.length > 0 ? (
                     <QRCode
-                      ref={qrGeneretorRef}
+                      getRef={qrGeneretorRef}
                       size={300}
                       value={valueGenerator}
                     />

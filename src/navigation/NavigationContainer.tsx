@@ -1,12 +1,12 @@
 /* eslint-disable react/react-in-jsx-scope */
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import GlobalModal from '../components/GlobalModal';
-import LoadingModal from '../components/LoadingModal';
-import LoginScreen from '../screens/Login';
+import GlobalModal from '@components/GlobalModal';
+import LoadingModal from '@components/LoadingModal';
+import LoginScreen from '@screens/Login';
 import BottomTab from './BottomTabContainer';
 import {navigationRef} from './NavigationService';
-import QRCodeScanner from '../screens/QRCodeScanner';
+import QRCodeScanner from '@screens/QRCodeScanner';
 
 const Stack = createStackNavigator();
 

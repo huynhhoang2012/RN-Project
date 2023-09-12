@@ -1,17 +1,13 @@
+import Block from '@components/Block';
+import Button from '@components/Button';
+import CustomText from '@components/CustomText';
+import {useAppDispatch} from '@hooks/useRedux';
+import {navigate} from '@navigation/NavigationService';
+import * as generalAct from '@redux/slices/GeneralState';
+import {toast} from '@utils/ToastHelper';
 import React, {useCallback, useState} from 'react';
-import {
-  KeyboardAvoidingView,
-  Platform,
-  Text,
-  TextInput,
-  View,
-} from 'react-native';
-import Button from '../../components/Button';
+import {KeyboardAvoidingView, Platform, TextInput} from 'react-native';
 import styles from './styles';
-import {toast} from '../../utils/ToastHelper';
-import {useAppDispatch} from '../../hooks/useRedux';
-import * as generalAct from '../../redux/slices/GeneralState';
-import {navigate} from '../../navigation/NavigationService';
 
 const LoginScreen = () => {
   const dispatch = useAppDispatch();
@@ -43,12 +39,12 @@ const LoginScreen = () => {
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}>
-      <View style={styles.body}>
-        <Text testID={'testText'} style={styles.textTitle}>
+      <Block style={styles.body}>
+        <CustomText testID={'testText'} style={styles.textTitle}>
           Login Screen
-        </Text>
-        <View>
-          <Text>User name</Text>
+        </CustomText>
+        <Block>
+          <CustomText>User name</CustomText>
           <TextInput
             placeholder="Username"
             testID="userNameText"
@@ -58,10 +54,10 @@ const LoginScreen = () => {
               setState({...state, userName: e});
             }}
           />
-        </View>
+        </Block>
 
-        <View>
-          <Text>Password</Text>
+        <Block>
+          <CustomText>Password</CustomText>
           <TextInput
             secureTextEntry={true}
             placeholder="Password"
@@ -72,14 +68,14 @@ const LoginScreen = () => {
               setState({...state, password: e});
             }}
           />
-        </View>
+        </Block>
         <Button
           testID="buttonLogin"
           onPress={() => onSubmitLogin()}
           style={styles.buttonLogin}>
-          <Text style={styles.titleButtonLogin}>Login</Text>
+          <CustomText style={styles.titleButtonLogin}>Login</CustomText>
         </Button>
-      </View>
+      </Block>
     </KeyboardAvoidingView>
   );
 };

@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
-import {WHITE} from '../../assets/colors';
-import {checkPlatform} from '../../utils/func';
+import {WHITE} from '@assets/colors';
+import {checkPlatform} from '@utils/func';
 
 export default StyleSheet.create({
   containerHeader: {
@@ -13,7 +13,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    height: checkPlatform('ios') ? 90 : 50,
+    height: checkPlatform('ios') ? null : 50,
   },
   title: {
     fontSize: 18,

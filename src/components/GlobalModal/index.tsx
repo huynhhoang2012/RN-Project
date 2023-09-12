@@ -1,10 +1,12 @@
+import Block from '@components/Block';
+import CustomText from '@components/CustomText';
+import {useAppDispatch, useAppSelector} from '@hooks/useRedux';
+import * as generalAct from '@redux/slices/GeneralState';
 import React from 'react';
-import {Modal, Text, TouchableOpacity, View} from 'react-native';
-import {useAppDispatch, useAppSelector} from '../../hooks/useRedux';
-import * as generalAct from '../../redux/slices/GeneralState';
-import styles from './styles';
+import {Modal} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Button from '../Button';
+import styles from './styles';
 
 const GlobalModal = () => {
   const dispatch = useAppDispatch();
@@ -18,20 +20,17 @@ const GlobalModal = () => {
 
   return (
     <Modal animationType="fade" transparent={true} visible={showModalGlobal}>
-      <View style={styles.container}>
-        <TouchableOpacity
-          style={styles.overlay}
-          onPress={() => turnOffModal()}
-        />
-        <View style={styles.modalView}>
+      <Block style={styles.container}>
+        <Button style={styles.overlay} onPress={() => turnOffModal()} />
+        <Block style={styles.modalView}>
           <Button
             onPress={() => turnOffModal()}
             style={{position: 'absolute', top: 5, right: 5}}>
             <AntDesign name="closecircle" size={18} />
           </Button>
-          <Text>Global Modal</Text>
-        </View>
-      </View>
+          <CustomText>Global Modal</CustomText>
+        </Block>
+      </Block>
     </Modal>
   );
 };

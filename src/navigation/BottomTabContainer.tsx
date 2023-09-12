@@ -1,10 +1,12 @@
 /* eslint-disable react/react-in-jsx-scope */
+import {WHITE} from '@assets/colors';
+import Block from '@components/Block';
+import CustomText from '@components/CustomText';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import HomeScreen from '@screens/Home';
+import SettingsScreen from '@screens/Setting';
 import LottieView from 'lottie-react-native';
-import {Platform, StyleSheet, Text, View} from 'react-native';
-import {WHITE} from '../assets/colors';
-import HomeScreen from '../screens/Home';
-import SettingsScreen from '../screens/Setting';
+import {Platform, StyleSheet} from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
@@ -22,19 +24,20 @@ function BottomTab() {
         options={{
           // eslint-disable-next-line react/no-unstable-nested-components
           tabBarIcon: ({focused}) => (
-            <View style={styles.viewButtonTab}>
-              <View style={styles.viewIcon}>
+            <Block style={styles.viewButtonTab}>
+              <Block style={styles.viewIcon}>
                 <LottieView
                   source={require('../assets/json/home.json')}
                   autoPlay
                   loop
                   style={styles.sizeIcon}
                 />
-              </View>
-              <Text style={focused ? styles.textFocused : styles.textNoFocused}>
+              </Block>
+              <CustomText
+                style={focused ? styles.textFocused : styles.textNoFocused}>
                 Home
-              </Text>
-            </View>
+              </CustomText>
+            </Block>
           ),
         }}
       />
@@ -44,19 +47,20 @@ function BottomTab() {
         options={{
           // eslint-disable-next-line react/no-unstable-nested-components
           tabBarIcon: ({focused}) => (
-            <View style={styles.viewButtonTab}>
-              <View style={styles.viewIcon}>
+            <Block style={styles.viewButtonTab}>
+              <Block style={styles.viewIcon}>
                 <LottieView
                   source={require('../assets/json/settings.json')}
                   autoPlay
                   loop
                   style={styles.sizeIconSettings}
                 />
-              </View>
-              <Text style={focused ? styles.textFocused : styles.textNoFocused}>
+              </Block>
+              <CustomText
+                style={focused ? styles.textFocused : styles.textNoFocused}>
                 Setting
-              </Text>
-            </View>
+              </CustomText>
+            </Block>
           ),
         }}
       />

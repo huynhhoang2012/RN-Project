@@ -1,29 +1,32 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable react-native/no-inline-styles */
-import {Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {WHITE} from '@assets/colors';
+import Block from '@components/Block';
+import Button from '@components/Button';
+import CustomText from '@components/CustomText';
+import {Platform, StyleSheet} from 'react-native';
 import Toast, {BaseToastProps} from 'react-native-toast-message';
-import {WHITE} from '../assets/colors';
 
 export default function ToastSettings() {
   const toastConfig = {
     success: ({text1}: BaseToastProps) => (
-      <TouchableOpacity onPress={() => Toast.hide()} style={{width: '100%'}}>
-        <View style={[styles.container, {backgroundColor: '#4285f4'}]}>
-          <Text style={styles.text}>{text1}</Text>
-        </View>
-      </TouchableOpacity>
+      <Button onPress={() => Toast.hide()} style={{width: '100%'}}>
+        <Block style={[styles.container, {backgroundColor: '#4285f4'}]}>
+          <CustomText style={styles.text}>{text1}</CustomText>
+        </Block>
+      </Button>
     ),
     error: ({text1}: BaseToastProps) => (
-      <TouchableOpacity
+      <Button
         onPress={() => {
           Toast.hide();
         }}
         style={{width: '100%'}}>
-        <View style={[styles.container, {backgroundColor: '#ff3547'}]}>
-          <Text style={styles.text}>{text1}</Text>
-        </View>
-      </TouchableOpacity>
+        <Block style={[styles.container, {backgroundColor: '#ff3547'}]}>
+          <CustomText style={styles.text}>{text1}</CustomText>
+        </Block>
+      </Button>
     ),
   };
 

@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {BACKGROUND_MODAL, WHITE} from '../../assets/colors';
+import {BACKGROUND_MODAL, WHITE} from '@assets/colors';
 
 export default StyleSheet.create({
   container: {

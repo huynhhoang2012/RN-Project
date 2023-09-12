@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
-import {WHITE} from '../../assets/colors';
-import {checkPlatform} from '../../utils/func';
+import {WHITE} from '@assets/colors';
+import {checkPlatform} from '@utils/func';
 
 export default StyleSheet.create({
   containerHeader: {

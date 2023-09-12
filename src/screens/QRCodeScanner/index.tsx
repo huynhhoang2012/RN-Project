@@ -1,12 +1,14 @@
+import {WHITE} from '@assets/colors';
+import Button from '@components/Button';
+import Header from '@components/Header';
 import React, {useRef, useState} from 'react';
-import {Keyboard, Text, View} from 'react-native';
+import {Keyboard} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
-import QRCode, {QRCodeProps} from 'react-native-qrcode-svg';
+import QRCode from 'react-native-qrcode-svg';
 import Feather from 'react-native-vector-icons/Feather';
-import {WHITE} from '../../assets/colors';
-import Button from '../../components/Button';
-import Header from '../../components/Header';
 import styles from './styles';
+import Block from '@components/Block';
+import CustomText from '@components/CustomText';
 
 const tabs = [
   {id: 1, title: 'Scanner', type: 'scanner'},
@@ -20,7 +22,7 @@ const QRCodeScanner = () => {
   const [isGenerator, setIsGenerator] = useState<boolean>(false);
   const _renderTab = () => {
     return (
-      <View style={styles.containerTab}>
+      <Block style={styles.containerTab}>
         {tabs.map(item => (
           <Button
             key={item.id}
@@ -30,17 +32,17 @@ const QRCodeScanner = () => {
             onPress={() => {
               setTabActive(item);
             }}>
-            <Text
+            <CustomText
               style={
                 tabActive.id === item.id
                   ? styles.titleTabActive
                   : styles.titleTab
               }>
               {item.title}
-            </Text>
+            </CustomText>
           </Button>
         ))}
-      </View>
+      </Block>
     );
   };
 
@@ -68,15 +70,15 @@ const QRCodeScanner = () => {
     switch (tabActive.type) {
       case 'scanner':
         return (
-          <View style={styles.bodyContent}>
-            <Text>123123</Text>
-          </View>
+          <Block style={styles.bodyContent}>
+            <CustomText>123123</CustomText>
+          </Block>
         );
 
       case 'generator':
         return (
-          <View style={styles.bodyContent}>
-            <View style={styles.viewInputGenerator}>
+          <Block style={styles.bodyContent}>
+            <Block style={styles.viewInputGenerator}>
               <TextInput
                 value={valueGenerator}
                 onChangeText={e => setValueGenerator(e)}
@@ -88,12 +90,14 @@ const QRCodeScanner = () => {
                   Keyboard.dismiss();
                   setIsGenerator(true);
                 }}>
-                <Text style={styles.textBtnGenerator}>Generator</Text>
+                <CustomText style={styles.textBtnGenerator}>
+                  Generator
+                </CustomText>
               </Button>
-            </View>
+            </Block>
             {isGenerator && (
               <>
-                <View style={styles.bodyQRGenerator}>
+                <Block style={styles.bodyQRGenerator}>
                   {valueGenerator.length > 0 ? (
                     <QRCode
                       getRef={qrGeneretorRef}
@@ -103,16 +107,17 @@ const QRCodeScanner = () => {
                   ) : (
                     <></>
                   )}
-                </View>
+                </Block>
                 <Button style={styles.btnSaveQRCode}>
                   <Feather name="download" size={20} color={WHITE} />
-                  <Text style={{color: WHITE, fontSize: 14, marginLeft: 6}}>
+                  <CustomText
+                    style={{color: WHITE, fontSize: 14, marginLeft: 6}}>
                     Save to gallery{' '}
-                  </Text>
+                  </CustomText>
                 </Button>
               </>
             )}
-          </View>
+          </Block>
         );
 
       default:
@@ -120,13 +125,13 @@ const QRCodeScanner = () => {
     }
   };
   return (
-    <View style={styles.container}>
+    <Block style={styles.container}>
       <Header title="QR Code" isGoBack={true} />
-      <View style={styles.body}>
+      <Block style={styles.body}>
         {_renderTab()}
         {_renderContent()}
-      </View>
-    </View>
+      </Block>
+    </Block>
   );
 };
 

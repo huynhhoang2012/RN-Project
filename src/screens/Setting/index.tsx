@@ -1,12 +1,13 @@
-import {View, Text} from 'react-native';
+import Block from '@components/Block';
+import Button from '@components/Button';
+import CustomText from '@components/CustomText';
+import Header from '@components/Header';
+import {navigate} from '@navigation/NavigationService';
 import React from 'react';
-import Header from '../../components/Header';
-import styles from './styles';
 import {FlatList} from 'react-native-gesture-handler';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import Button from '../../components/Button';
-import {navigate} from '../../navigation/NavigationService';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import styles from './styles';
 
 type typeListButtonSetting = {
   title: string;
@@ -30,18 +31,18 @@ const SettingsScreen = () => {
         onPress={() => {
           navigate(item.screen);
         }}>
-        <View style={styles.viewLeftItem}>
+        <Block style={styles.viewLeftItem}>
           {item.icon}
-          <Text style={styles.titleItem}>{item.title}</Text>
-        </View>
-        <View>
+          <CustomText style={styles.titleItem}>{item.title}</CustomText>
+        </Block>
+        <Block>
           <AntDesign name="right" size={14} />
-        </View>
+        </Block>
       </Button>
     );
   };
   return (
-    <View style={styles.container}>
+    <Block style={styles.container}>
       <Header title="Settings" />
       <FlatList
         style={styles.viewFlatList}
@@ -49,7 +50,7 @@ const SettingsScreen = () => {
         renderItem={({item}) => _renderButtonList(item)}
         keyExtractor={(item: typeListButtonSetting) => item.title}
       />
-    </View>
+    </Block>
   );
 };
 

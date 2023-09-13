@@ -1,5 +1,5 @@
 import React from 'react';
-import {Platform, TextBase, TextStyle} from 'react-native';
+import {Platform, Text, TextStyle} from 'react-native';
 
 type CustomTextProps = {
   children?: React.ReactNode;
@@ -21,13 +21,12 @@ const CustomText = (props: CustomTextProps) => {
       fontWeight: weight === 'bold' && Platform.OS === 'ios' ? '500' : weight,
     },
     color && {color},
-
     style,
   ];
   return (
-    <TextBase testID={testID} style={customTextStyle} {...rest}>
+    <Text testID={testID} style={customTextStyle} {...rest}>
       {children}
-    </TextBase>
+    </Text>
   );
 };
 

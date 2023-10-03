@@ -5,54 +5,33 @@ import Button from '@components/Button';
 import CustomInput from '@components/CustomInput';
 import CustomSvg from '@components/CustomSvg';
 import CustomText from '@components/CustomText';
-import {useAppDispatch} from '@hooks/useRedux';
 import {useSafeAreaInsetsCustom} from '@hooks/useSafeAreaInsetsCustom';
-import {navigate} from '@navigation/NavigationService';
-import * as generalAct from '@redux/slices/GeneralState';
-import {toast} from '@utils/ToastHelper';
-import React, {useCallback, useState} from 'react';
+import {goBack} from '@navigation/NavigationService';
+import React, {useState} from 'react';
 import styles from './styles';
 
-type LoginStateType = {
-  email: string;
-  password: string;
+type SignUpStateType = {
+  email?: string;
+  password?: string;
+  repeatPassword?: string;
 };
-const LoginScreen = () => {
-  const dispatch = useAppDispatch();
-  const [state, setState] = useState<LoginStateType>({
+
+const SignUp = () => {
+  const [state, setState] = useState<SignUpStateType>({
     email: '',
     password: '',
+    repeatPassword: '',
   });
 
-  const onSubmitLogin = useCallback(() => {
-    dispatch(generalAct.setLoading(true));
-    setTimeout(() => {
-      try {
-        if (state.email === 'admin' && state.password === 'admin') {
-          toast('login successful');
-          dispatch(generalAct.setLoading(false));
-          navigate('BottomTab');
-        } else {
-          toast('wrong login', 'error');
-          dispatch(generalAct.setLoading(false));
-        }
-      } catch (e) {
-        toast('wrong login', 'error');
-        dispatch(generalAct.setLoading(false));
-      }
-    }, 5000);
-  }, [dispatch, state.password, state.email]);
-
-  const goToSignUpScreen = () => {
-    navigate('SignUp');
+  const goBackLoginScreen = () => {
+    goBack();
   };
-
   return (
     <Block style={styles.container}>
       <Block style={[styles.body, {marginTop: useSafeAreaInsetsCustom().top}]}>
         <Block flex middle center>
           <CustomText testID={'testText'} style={styles.textTitle}>
-            Log In
+            Sign Up
           </CustomText>
         </Block>
         <Block flex={2} center>
@@ -62,25 +41,26 @@ const LoginScreen = () => {
             value={state.email}
             onChange={e => setState({...state, email: e})}
           />
-
           <CustomInput
             style={styles.inputLogin}
             label="Password"
             value={state.password}
-            onChange={e => setState({...state, password: e})}
             isPassword={true}
+            onChange={e => setState({...state, password: e})}
           />
-          <Button style={styles.buttonLogin} onPress={() => onSubmitLogin()}>
-            <CustomText style={styles.titleButtonLogin}>Login</CustomText>
-          </Button>
-          <Button style={{marginTop: 12}}>
-            <CustomText style={styles.textUnderline}>
-              Forgot password?
-            </CustomText>
+          <CustomInput
+            style={styles.inputLogin}
+            label="Repeat password"
+            value={state.repeatPassword}
+            isPassword={true}
+            onChange={e => setState({...state, repeatPassword: e})}
+          />
+          <Button style={styles.buttonLogin}>
+            <CustomText style={styles.titleButtonLogin}>Sign Up</CustomText>
           </Button>
         </Block>
         <Block flex middle center style={{}}>
-          <CustomText>Login with</CustomText>
+          <CustomText>Or sign up with</CustomText>
           <Block row mt={17} style={styles.viewButtonSocial}>
             <Button style={styles.buttonSocial}>
               <CustomText size={16} weight="700" color={WHITE}>
@@ -98,10 +78,11 @@ const LoginScreen = () => {
         </Block>
 
         <Block flex middle center>
-          <Button onPress={() => goToSignUpScreen()}>
-            <CustomText style={styles.textUnderline}>
-              Dont have and account? Sign Up
-            </CustomText>
+          <Button
+            onPress={() => {
+              goBackLoginScreen();
+            }}>
+            <CustomText style={styles.textUnderline}>Log In </CustomText>
           </Button>
         </Block>
       </Block>
@@ -109,4 +90,4 @@ const LoginScreen = () => {
   );
 };
 
-export default LoginScreen;
+export default SignUp;

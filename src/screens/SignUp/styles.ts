@@ -22,13 +22,13 @@ export default StyleSheet.create({
     backgroundColor: '#ECEDEF',
     paddingVertical: 18,
     width: Dimensions.get('screen').width - 60,
-    marginBottom: 20,
     paddingHorizontal: 16,
   },
   buttonLogin: {
     backgroundColor: '#EC6758',
     borderRadius: 50,
     paddingVertical: 14,
+    marginTop: 10,
   },
   titleButtonLogin: {
     color: WHITE,

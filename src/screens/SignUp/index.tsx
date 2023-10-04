@@ -7,7 +7,9 @@ import CustomSvg from '@components/CustomSvg';
 import CustomText from '@components/CustomText';
 import {useSafeAreaInsetsCustom} from '@hooks/useSafeAreaInsetsCustom';
 import {goBack} from '@navigation/NavigationService';
-import React, {useState} from 'react';
+import {Formik} from 'formik';
+import React from 'react';
+import * as yup from 'yup';
 import styles from './styles';
 
 type SignUpStateType = {
@@ -16,16 +18,29 @@ type SignUpStateType = {
   repeatPassword?: string;
 };
 
-const SignUp = () => {
-  const [state, setState] = useState<SignUpStateType>({
-    email: '',
-    password: '',
-    repeatPassword: '',
-  });
+const signUpSchema = yup.object().shape({
+  email: yup
+    .string()
+    .email('Email address is not valid.')
+    .required('Please enter your email address here. '),
+  password: yup
+    .string()
+    .required('Please enter your password.')
+    .min(6, 'Please enter a password Password must be over 6 characters.'),
+  repeatPassword: yup
+    .string()
+    .required('Please enter your password.')
+    .oneOf(
+      [yup.ref('password'), null],
+      `Confirm password Passwords don't match.`,
+    ),
+});
 
+const SignUp = () => {
   const goBackLoginScreen = () => {
     goBack();
   };
+
   return (
     <Block style={styles.container}>
       <Block style={[styles.body, {marginTop: useSafeAreaInsetsCustom().top}]}>
@@ -34,31 +49,63 @@ const SignUp = () => {
             Sign Up
           </CustomText>
         </Block>
-        <Block flex={2} center>
-          <CustomInput
-            style={styles.inputLogin}
-            label="Email"
-            value={state.email}
-            onChange={e => setState({...state, email: e})}
-          />
-          <CustomInput
-            style={styles.inputLogin}
-            label="Password"
-            value={state.password}
-            isPassword={true}
-            onChange={e => setState({...state, password: e})}
-          />
-          <CustomInput
-            style={styles.inputLogin}
-            label="Repeat password"
-            value={state.repeatPassword}
-            isPassword={true}
-            onChange={e => setState({...state, repeatPassword: e})}
-          />
-          <Button style={styles.buttonLogin}>
-            <CustomText style={styles.titleButtonLogin}>Sign Up</CustomText>
-          </Button>
-        </Block>
+        <Formik
+          initialValues={{
+            email: '',
+            password: '',
+            repeatPassword: '',
+          }}
+          validationSchema={signUpSchema}
+          onSubmit={values => {
+            console.log(values);
+          }}>
+          {({
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            values,
+            errors,
+            touched,
+          }) => (
+            <Block flex={2} center>
+              <CustomInput
+                style={styles.inputLogin}
+                label="Email"
+                value={values.email}
+                onChange={handleChange('email')}
+                handleBlur={handleBlur('email')}
+                touched={touched}
+                errors={errors}
+                name="email"
+              />
+              <CustomInput
+                style={styles.inputLogin}
+                label="Password"
+                value={values.password}
+                onChange={handleChange('password')}
+                handleBlur={handleBlur('password')}
+                touched={touched}
+                errors={errors}
+                name="password"
+              />
+              <CustomInput
+                style={styles.inputLogin}
+                label="Repeat password"
+                value={values.repeatPassword}
+                onChange={handleChange('repeatPassword')}
+                handleBlur={handleBlur('repeatPassword')}
+                touched={touched}
+                errors={errors}
+                name="email"
+              />
+
+              <Button style={styles.buttonLogin} onPress={handleSubmit}>
+                <CustomText style={styles.titleButtonLogin}>Sign Up</CustomText>
+              </Button>
+            </Block>
+          )}
+        </Formik>
+
         <Block flex middle center style={{}}>
           <CustomText>Or sign up with</CustomText>
           <Block row mt={17} style={styles.viewButtonSocial}>

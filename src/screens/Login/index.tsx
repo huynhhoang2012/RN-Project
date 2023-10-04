@@ -10,38 +10,51 @@ import {useSafeAreaInsetsCustom} from '@hooks/useSafeAreaInsetsCustom';
 import {navigate} from '@navigation/NavigationService';
 import * as generalAct from '@redux/slices/GeneralState';
 import {toast} from '@utils/ToastHelper';
-import React, {useCallback, useState} from 'react';
+import {Formik} from 'formik';
+import React, {useCallback} from 'react';
+import * as yup from 'yup';
 import styles from './styles';
 
 type LoginStateType = {
   email: string;
   password: string;
 };
+
+const loginSchema = yup.object().shape({
+  email: yup
+    .string()
+    .email('Email address is not valid.')
+    .required('Please enter your email address here. '),
+  password: yup
+    .string()
+    .required('Please enter your password. ')
+    .min(6, 'Please enter a password Password must be over 6 characters.'),
+});
+
 const LoginScreen = () => {
   const dispatch = useAppDispatch();
-  const [state, setState] = useState<LoginStateType>({
-    email: '',
-    password: '',
-  });
 
-  const onSubmitLogin = useCallback(() => {
-    dispatch(generalAct.setLoading(true));
-    setTimeout(() => {
-      try {
-        if (state.email === 'admin' && state.password === 'admin') {
-          toast('login successful');
-          dispatch(generalAct.setLoading(false));
-          navigate('BottomTab');
-        } else {
+  const onSubmitLogin = useCallback(
+    ({email, password}: LoginStateType) => {
+      dispatch(generalAct.setLoading(true));
+      setTimeout(() => {
+        try {
+          if (email === 'admin' && password === 'admin') {
+            toast('login successful');
+            dispatch(generalAct.setLoading(false));
+            navigate('BottomTab');
+          } else {
+            toast('wrong login', 'error');
+            dispatch(generalAct.setLoading(false));
+          }
+        } catch (e) {
           toast('wrong login', 'error');
           dispatch(generalAct.setLoading(false));
         }
-      } catch (e) {
-        toast('wrong login', 'error');
-        dispatch(generalAct.setLoading(false));
-      }
-    }, 5000);
-  }, [dispatch, state.password, state.email]);
+      }, 5000);
+    },
+    [dispatch],
+  );
 
   const goToSignUpScreen = () => {
     navigate('SignUp');
@@ -55,30 +68,58 @@ const LoginScreen = () => {
             Log In
           </CustomText>
         </Block>
-        <Block flex={2} center>
-          <CustomInput
-            style={styles.inputLogin}
-            label="Email"
-            value={state.email}
-            onChange={e => setState({...state, email: e})}
-          />
+        <Formik
+          initialValues={{
+            email: '',
+            password: '',
+          }}
+          validationSchema={loginSchema}
+          onSubmit={values => {
+            onSubmitLogin(values);
+          }}>
+          {({
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            values,
+            errors,
+            touched,
+          }) => (
+            <Block flex={2} center>
+              <CustomInput
+                style={styles.inputLogin}
+                label="Email"
+                value={values.email}
+                onChange={handleChange('email')}
+                handleBlur={handleBlur('email')}
+                touched={touched}
+                errors={errors}
+                name="email"
+              />
 
-          <CustomInput
-            style={styles.inputLogin}
-            label="Password"
-            value={state.password}
-            onChange={e => setState({...state, password: e})}
-            isPassword={true}
-          />
-          <Button style={styles.buttonLogin} onPress={() => onSubmitLogin()}>
-            <CustomText style={styles.titleButtonLogin}>Login</CustomText>
-          </Button>
-          <Button style={{marginTop: 12}}>
-            <CustomText style={styles.textUnderline}>
-              Forgot password?
-            </CustomText>
-          </Button>
-        </Block>
+              <CustomInput
+                style={styles.inputLogin}
+                label="Password"
+                value={values.password}
+                isPassword={true}
+                onChange={handleChange('password')}
+                handleBlur={handleBlur('email')}
+                touched={touched}
+                errors={errors}
+                name="password"
+              />
+              <Button style={styles.buttonLogin} onPress={handleSubmit}>
+                <CustomText style={styles.titleButtonLogin}>Login</CustomText>
+              </Button>
+              <Button style={{marginTop: 12}}>
+                <CustomText style={styles.textUnderline}>
+                  Forgot password?
+                </CustomText>
+              </Button>
+            </Block>
+          )}
+        </Formik>
+
         <Block flex middle center style={{}}>
           <CustomText>Login with</CustomText>
           <Block row mt={17} style={styles.viewButtonSocial}>

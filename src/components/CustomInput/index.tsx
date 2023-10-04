@@ -14,7 +14,11 @@ type Props = {
   isPassword?: boolean;
   value?: string;
   onChange?: (e: string) => void;
+  handleBlur?: (e: string) => void;
   label?: string;
+  name: string;
+  touched?: any;
+  errors?: any;
 };
 
 if (Platform.OS === 'android') {
@@ -24,7 +28,8 @@ if (Platform.OS === 'android') {
 }
 
 const CustomInput = (props: Props) => {
-  const {style, isPassword, value, onChange, label} = props;
+  const {style, isPassword, value, onChange, label, name, errors, touched} =
+    props;
 
   const [hidePassword, setHidePassword] = useState(isPassword);
 
@@ -34,34 +39,48 @@ const CustomInput = (props: Props) => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     setIsFocused(true);
   };
-  const handleBlur = () => {
+  const handleBlurInput = () => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     setIsFocused(false);
+    // handleBlur();
   };
 
   return (
-    <Block style={style}>
-      {value && value?.length > 0 && isFocused && (
-        <CustomText style={styles.labelFocused}>{label}</CustomText>
+    <>
+      <Block
+        style={[
+          style,
+          errors[name] && touched[name] && styles.borderErrorInput,
+        ]}>
+        {isFocused && (
+          <CustomText style={styles.labelFocused}>{label}</CustomText>
+        )}
+        {value?.length === 0 && !isFocused && (
+          <CustomText style={styles.labelBlur}>{label}</CustomText>
+        )}
+        <TextInput
+          value={value}
+          onChangeText={onChange}
+          secureTextEntry={hidePassword}
+          onFocus={handleFocus}
+          onBlur={handleBlurInput}
+        />
+        {isPassword && (
+          <Button
+            style={styles.buttonEye}
+            onPress={() => setHidePassword(pre => !pre)}>
+            <SvgXml xml={SVG_EYE_VISIBLE} width={16} height={16} />
+          </Button>
+        )}
+      </Block>
+      {errors[name] && touched[name] && (
+        <Block style={styles.viewErrorText}>
+          <CustomText size={12} weight="500" style={styles.error}>
+            {errors[name]}
+          </CustomText>
+        </Block>
       )}
-      {value?.length === 0 && !isFocused && (
-        <CustomText style={styles.labelBlur}>{label}</CustomText>
-      )}
-      <TextInput
-        value={value}
-        onChangeText={onChange}
-        secureTextEntry={hidePassword}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-      />
-      {isPassword && (
-        <Button
-          style={styles.buttonEye}
-          onPress={() => setHidePassword(pre => !pre)}>
-          <SvgXml xml={SVG_EYE_VISIBLE} width={16} height={16} />
-        </Button>
-      )}
-    </Block>
+    </>
   );
 };
 

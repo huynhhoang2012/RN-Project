@@ -1,5 +1,5 @@
 import {PRIMARY, WHITE} from '@assets/colors';
-import {Dimensions, StyleSheet} from 'react-native';
+import {Dimensions, Platform, StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   container: {
@@ -20,9 +20,12 @@ export default StyleSheet.create({
   inputLogin: {
     borderRadius: 50,
     backgroundColor: '#ECEDEF',
-    paddingVertical: 18,
+    // paddingVertical: Platform.OS === 'ios' ? 18 : 12,
     width: Dimensions.get('screen').width - 60,
     paddingHorizontal: 16,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   buttonLogin: {
     backgroundColor: '#EC6758',

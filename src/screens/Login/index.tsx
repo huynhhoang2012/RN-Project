@@ -63,7 +63,7 @@ const LoginScreen = () => {
   return (
     <Block style={styles.container}>
       <Block style={[styles.body, {marginTop: useSafeAreaInsetsCustom().top}]}>
-        <Block flex middle center>
+        <Block flex={1} middle center>
           <CustomText testID={'testText'} style={styles.textTitle}>
             Log In
           </CustomText>
@@ -120,7 +120,7 @@ const LoginScreen = () => {
           )}
         </Formik>
 
-        <Block flex middle center style={{}}>
+        <Block flex={1} middle center style={{}}>
           <CustomText>Login with</CustomText>
           <Block row mt={17} style={styles.viewButtonSocial}>
             <Button style={styles.buttonSocial}>
@@ -138,7 +138,7 @@ const LoginScreen = () => {
           </Block>
         </Block>
 
-        <Block flex middle center>
+        <Block flex={1} middle center>
           <Button onPress={() => goToSignUpScreen()}>
             <CustomText style={styles.textUnderline}>
               Dont have and account? Sign Up

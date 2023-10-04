@@ -15,7 +15,7 @@ const OnBoarding = () => {
     };
   });
   return (
-    <Block flex center middle style={styles.container}>
+    <Block flex={1} center middle style={styles.container}>
       <CustomImage
         source={require('../../assets/images/avatar.png')}
         style={{width: 200, height: 200}}

@@ -1,5 +1,5 @@
 import {WHITE} from '@assets/colors';
-import {Dimensions, StyleSheet} from 'react-native';
+import {Dimensions, Platform, StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   buttonEye: {position: 'absolute', right: 4, top: 8},
@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
   },
 
   labelBlur: {
-    top: 18,
+    top: Platform.OS === 'ios' ? 18 : 14,
     color: '#aaa',
     backgroundColor: 'transparent',
     position: 'absolute',

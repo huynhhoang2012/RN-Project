@@ -15,32 +15,11 @@ def node_require(script)
 end
 
 node_require('react-native/scripts/react_native_pods.rb')
-node_require('react-native-permissions/scripts/setup.rb')
 
 platform :ios, min_ios_version_supported
 prepare_react_native_project!
 
 
-setup_permissions([
-  # 'AppTrackingTransparency',
-  # 'BluetoothPeripheral',
-  # 'Calendars',
-  'Camera',
-  # 'Contacts',
-  # 'FaceID',
-  # 'LocationAccuracy',
-  # 'LocationAlways',
-  # 'LocationWhenInUse',
-  # 'MediaLibrary',
-  # 'Microphone',
-  # 'Motion',
-  # 'Notifications',
-  'PhotoLibrary',
-  'PhotoLibraryAddOnly',
-  # 'Reminders',
-  # 'SpeechRecognition',
-  # 'StoreKit'
-])
 
 # If you are using a `react-native-flipper` your iOS build will fail when `NO_FLIPPER=1` is set.
 # because `react-native-flipper` depends on (FlipperKit,...) that will be excluded
@@ -79,15 +58,6 @@ target 'RN_Project' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  #/react-native-fs
-  pod 'RNFS', :path => '../node_modules/react-native-fs'
-
-  #/react-native-firebase
-  pod 'Firebase', :modular_headers => true
-  pod 'FirebaseCoreInternal', :modular_headers => true
-  pod 'GoogleUtilities', :modular_headers => true
-  pod 'FirebaseCore', :modular_headers => true
-  
   target 'RN_ProjectTests' do
     inherit! :complete
     # Pods for testing

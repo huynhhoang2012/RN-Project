@@ -59,6 +59,7 @@ const CustomInput = (props: Props) => {
           <CustomText style={styles.labelBlur}>{label}</CustomText>
         )}
         <TextInput
+          style={{width: '100%'}}
           value={value}
           onChangeText={onChange}
           secureTextEntry={hidePassword}

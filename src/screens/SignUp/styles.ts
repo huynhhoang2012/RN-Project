@@ -20,9 +20,11 @@ export default StyleSheet.create({
   inputLogin: {
     borderRadius: 50,
     backgroundColor: '#ECEDEF',
-    paddingVertical: 18,
     width: Dimensions.get('screen').width - 60,
     paddingHorizontal: 16,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   buttonLogin: {
     backgroundColor: '#EC6758',

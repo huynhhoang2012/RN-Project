@@ -87,6 +87,7 @@ const SignUp = () => {
                 touched={touched}
                 errors={errors}
                 name="password"
+                isPassword={true}
               />
               <CustomInput
                 style={styles.inputLogin}
@@ -96,7 +97,8 @@ const SignUp = () => {
                 handleBlur={handleBlur('repeatPassword')}
                 touched={touched}
                 errors={errors}
-                name="email"
+                name="repeatPassword"
+                isPassword={true}
               />
 
               <Button style={styles.buttonLogin} onPress={handleSubmit}>

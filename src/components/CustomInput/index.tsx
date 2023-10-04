@@ -73,12 +73,14 @@ const CustomInput = (props: Props) => {
           </Button>
         )}
       </Block>
-      {errors[name] && touched[name] && (
+      {errors[name] && touched[name] ? (
         <Block style={styles.viewErrorText}>
           <CustomText size={12} weight="500" style={styles.error}>
             {errors[name]}
           </CustomText>
         </Block>
+      ) : (
+        <Block style={{height: 24}} />
       )}
     </>
   );

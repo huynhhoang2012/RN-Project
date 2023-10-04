@@ -7,6 +7,8 @@ import LoginScreen from '@screens/Login';
 import BottomTab from './BottomTabContainer';
 import {navigationRef} from './NavigationService';
 import QRCodeScanner from '@screens/QRCodeScanner';
+import OnBoarding from '@screens/OnBoarding';
+import SignUp from '@screens/SignUp';
 
 const Stack = createStackNavigator();
 
@@ -15,12 +17,14 @@ function MyStack() {
     <>
       <NavigationContainer ref={navigationRef}>
         <Stack.Navigator
-          initialRouteName={'BottomTab'}
+          initialRouteName={'OnBoarding'}
           screenOptions={{
             headerShown: false,
           }}>
           <Stack.Screen name="BottomTab" component={BottomTab} />
+          <Stack.Screen name="OnBoarding" component={OnBoarding} />
           <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="SignUp" component={SignUp} />
           <Stack.Screen name="QRCodeScanner" component={QRCodeScanner} />
         </Stack.Navigator>
       </NavigationContainer>

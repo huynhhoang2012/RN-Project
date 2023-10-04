@@ -5,59 +5,40 @@ import Button from '@components/Button';
 import CustomInput from '@components/CustomInput';
 import CustomSvg from '@components/CustomSvg';
 import CustomText from '@components/CustomText';
-import {useAppDispatch} from '@hooks/useRedux';
 import {useSafeAreaInsetsCustom} from '@hooks/useSafeAreaInsetsCustom';
-import {navigate} from '@navigation/NavigationService';
-import * as generalAct from '@redux/slices/GeneralState';
-import {toast} from '@utils/ToastHelper';
+import {goBack} from '@navigation/NavigationService';
 import {Formik} from 'formik';
-import React, {useCallback} from 'react';
+import React from 'react';
 import * as yup from 'yup';
 import styles from './styles';
 
-type LoginStateType = {
-  email: string;
-  password: string;
+type SignUpStateType = {
+  email?: string;
+  password?: string;
+  repeatPassword?: string;
 };
 
-const loginSchema = yup.object().shape({
+const signUpSchema = yup.object().shape({
   email: yup
     .string()
     .email('Email address is not valid.')
     .required('Please enter your email address here. '),
   password: yup
     .string()
-    .required('Please enter your password. ')
+    .required('Please enter your password.')
     .min(6, 'Please enter a password Password must be over 6 characters.'),
+  repeatPassword: yup
+    .string()
+    .required('Please enter your password.')
+    .oneOf(
+      [yup.ref('password'), null],
+      `Confirm password Passwords don't match.`,
+    ),
 });
 
-const LoginScreen = () => {
-  const dispatch = useAppDispatch();
-
-  const onSubmitLogin = useCallback(
-    ({email, password}: LoginStateType) => {
-      dispatch(generalAct.setLoading(true));
-      setTimeout(() => {
-        try {
-          if (email === 'admin' && password === 'admin') {
-            toast('login successful');
-            dispatch(generalAct.setLoading(false));
-            navigate('BottomTab');
-          } else {
-            toast('wrong login', 'error');
-            dispatch(generalAct.setLoading(false));
-          }
-        } catch (e) {
-          toast('wrong login', 'error');
-          dispatch(generalAct.setLoading(false));
-        }
-      }, 5000);
-    },
-    [dispatch],
-  );
-
-  const goToSignUpScreen = () => {
-    navigate('SignUp');
+const SignUp = () => {
+  const goBackLoginScreen = () => {
+    goBack();
   };
 
   return (
@@ -65,17 +46,18 @@ const LoginScreen = () => {
       <Block style={[styles.body, {marginTop: useSafeAreaInsetsCustom().top}]}>
         <Block flex middle center>
           <CustomText testID={'testText'} style={styles.textTitle}>
-            Log In
+            Sign Up
           </CustomText>
         </Block>
         <Formik
           initialValues={{
             email: '',
             password: '',
+            repeatPassword: '',
           }}
-          validationSchema={loginSchema}
+          validationSchema={signUpSchema}
           onSubmit={values => {
-            onSubmitLogin(values);
+            console.log(values);
           }}>
           {({
             handleChange,
@@ -96,32 +78,36 @@ const LoginScreen = () => {
                 errors={errors}
                 name="email"
               />
-
               <CustomInput
                 style={styles.inputLogin}
                 label="Password"
                 value={values.password}
-                isPassword={true}
                 onChange={handleChange('password')}
-                handleBlur={handleBlur('email')}
+                handleBlur={handleBlur('password')}
                 touched={touched}
                 errors={errors}
                 name="password"
               />
+              <CustomInput
+                style={styles.inputLogin}
+                label="Repeat password"
+                value={values.repeatPassword}
+                onChange={handleChange('repeatPassword')}
+                handleBlur={handleBlur('repeatPassword')}
+                touched={touched}
+                errors={errors}
+                name="email"
+              />
+
               <Button style={styles.buttonLogin} onPress={handleSubmit}>
-                <CustomText style={styles.titleButtonLogin}>Login</CustomText>
-              </Button>
-              <Button style={{marginTop: 12}}>
-                <CustomText style={styles.textUnderline}>
-                  Forgot password?
-                </CustomText>
+                <CustomText style={styles.titleButtonLogin}>Sign Up</CustomText>
               </Button>
             </Block>
           )}
         </Formik>
 
         <Block flex middle center style={{}}>
-          <CustomText>Login with</CustomText>
+          <CustomText>Or sign up with</CustomText>
           <Block row mt={17} style={styles.viewButtonSocial}>
             <Button style={styles.buttonSocial}>
               <CustomText size={16} weight="700" color={WHITE}>
@@ -139,10 +125,11 @@ const LoginScreen = () => {
         </Block>
 
         <Block flex middle center>
-          <Button onPress={() => goToSignUpScreen()}>
-            <CustomText style={styles.textUnderline}>
-              Dont have and account? Sign Up
-            </CustomText>
+          <Button
+            onPress={() => {
+              goBackLoginScreen();
+            }}>
+            <CustomText style={styles.textUnderline}>Log In </CustomText>
           </Button>
         </Block>
       </Block>
@@ -150,4 +137,4 @@ const LoginScreen = () => {
   );
 };
 
-export default LoginScreen;
+export default SignUp;

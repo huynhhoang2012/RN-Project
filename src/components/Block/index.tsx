@@ -10,7 +10,7 @@ type BlockProps = {
   pr?: number;
   pb?: number;
   style?: ViewStyle | ViewStyle[];
-  flex?: number;
+  flex?: number | boolean;
   row?: boolean;
   shadow?: boolean;
   ma?: number;
@@ -18,6 +18,8 @@ type BlockProps = {
   mt?: number;
   mr?: number;
   mb?: number;
+  center?: boolean;
+  middle?: boolean;
 };
 
 const Block = (props: BlockProps) => {
@@ -37,6 +39,8 @@ const Block = (props: BlockProps) => {
     mt,
     mr,
     mb,
+    center,
+    middle,
     ...rest
   } = props;
 
@@ -54,6 +58,8 @@ const Block = (props: BlockProps) => {
     mr && {marginRight: mr},
     mt && {marginTop: mt},
     mb && {marginBottom: mb},
+    center && {justifyContent: 'center'},
+    middle && {alignItems: 'center'},
     style,
   ];
 

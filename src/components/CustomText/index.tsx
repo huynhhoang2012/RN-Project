@@ -1,5 +1,5 @@
 import React from 'react';
-import {Platform, Text, TextStyle} from 'react-native';
+import {Platform, Text, TextStyle, ViewStyle} from 'react-native';
 
 type CustomTextProps = {
   children?: React.ReactNode;
@@ -7,7 +7,7 @@ type CustomTextProps = {
   center?: boolean;
   weight?: string;
   color?: string;
-  style?: TextStyle;
+  style?: TextStyle | ViewStyle | ViewStyle[];
   testID?: string;
 };
 

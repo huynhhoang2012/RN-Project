@@ -1,5 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
-import {WHITE} from '@assets/colors';
+import {PRIMARY, WHITE} from '@assets/colors';
 import Block from '@components/Block';
 import CustomText from '@components/CustomText';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -17,6 +17,7 @@ function BottomTab() {
       screenOptions={{
         headerShown: false,
         tabBarShowLabel: false,
+        tabBarHideOnKeyboard: Platform.OS !== 'ios',
       }}>
       <Tab.Screen
         name="Home"
@@ -88,7 +89,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginTop: 4,
     fontWeight: '600',
-    color: '#FF478D',
+    color: PRIMARY,
   },
   sizeIcon: {
     width: 50,

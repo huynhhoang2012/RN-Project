@@ -1,3 +1,4 @@
+import {fonts} from '@assets/fonts';
 import React from 'react';
 import {Platform, Text, TextStyle, ViewStyle} from 'react-native';
 
@@ -9,10 +10,33 @@ type CustomTextProps = {
   color?: string;
   style?: TextStyle | ViewStyle | ViewStyle[];
   testID?: string;
+  bold?: boolean;
+  extraBold?: boolean;
+  italic?: boolean;
+  light?: boolean;
+  medium?: boolean;
+  regular?: boolean;
+  semiBold?: boolean;
 };
 
 const CustomText = (props: CustomTextProps) => {
-  const {children, size, center, weight, color, style, testID, ...rest} = props;
+  const {
+    children,
+    size,
+    center,
+    weight,
+    color,
+    style,
+    testID,
+    bold,
+    extraBold,
+    italic,
+    light,
+    medium,
+    regular,
+    semiBold,
+    ...rest
+  } = props;
 
   const customTextStyle: any = [
     size && {fontSize: size},
@@ -21,6 +45,13 @@ const CustomText = (props: CustomTextProps) => {
       fontWeight: weight === 'bold' && Platform.OS === 'ios' ? '500' : weight,
     },
     color && {color},
+    bold && fonts.FONT_BOLD,
+    extraBold && fonts.FONT_EXTRABOLD,
+    italic && fonts.FONT_ITALIC,
+    light && fonts.FONT_LIGHT,
+    medium && fonts.FONT_MEDIUM,
+    regular && fonts.FONT_REGULAR,
+    semiBold && fonts.FONT_SEMIBOLD,
     style,
   ];
   return (
@@ -28,6 +59,10 @@ const CustomText = (props: CustomTextProps) => {
       {children}
     </Text>
   );
+};
+
+CustomText.defaultProps = {
+  light: true,
 };
 
 export default CustomText;

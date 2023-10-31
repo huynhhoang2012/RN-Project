@@ -1,3 +1,4 @@
+import {WHITE} from '@assets/colors';
 import {Platform, StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
@@ -10,10 +11,8 @@ export default StyleSheet.create({
     justifyContent: 'flex-start',
     zIndex: 10,
     alignItems: 'center',
-    backgroundColor: '#F1F1F2',
-    borderRadius: 10,
-    borderColor: 'gray',
-    borderWidth: 0.2,
+    backgroundColor: WHITE,
+    borderRadius: 12,
   },
   searchInputStyle: {
     fontSize: 16,
@@ -23,7 +22,6 @@ export default StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 10,
     borderRadius: 12,
-    // paddingLeft: 32,
   },
   searchIconWrapper: {
     position: 'absolute',

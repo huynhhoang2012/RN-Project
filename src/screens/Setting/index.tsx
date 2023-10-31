@@ -14,6 +14,7 @@ import {useAppDispatch, useAppSelector} from '@hooks/useRedux';
 import {PRIMARY, WHITE} from '@assets/colors';
 import {debounce} from 'lodash';
 import * as generalAct from '@redux/slices/GeneralState';
+import SwitchCustom from '@components/SwitchCustom';
 
 type typeListButtonSetting = {
   title: string;
@@ -41,9 +42,8 @@ const SettingsScreen = () => {
 
   const isDarkMode = useAppSelector(state => state.general.darkMode);
 
-  console.log(isDarkMode);
-
   const changeStatusDarkMode = debounce(e => {
+    console.log(e);
     dispatch(generalAct.setDarkMode(e));
   }, 100);
 
@@ -59,18 +59,24 @@ const SettingsScreen = () => {
         }}>
         <Block style={styles.viewLeftItem}>
           {item.icon}
-          <CustomText style={styles.titleItem}>{item.title}</CustomText>
+          <CustomText bold style={styles.titleItem}>
+            {item.title}
+          </CustomText>
         </Block>
         <Block>
           {item.type === 'dark-mode' ? (
-            <Switch
-              trackColor={{false: WHITE, true: PRIMARY}}
-              ios_backgroundColor={WHITE}
-              onValueChange={e => changeStatusDarkMode(e)}
+            <SwitchCustom
               value={isDarkMode}
-              style={styles.switch}
+              handleChange={e => changeStatusDarkMode(e)}
             />
           ) : (
+            // <Switch
+            //   trackColor={{false: WHITE, true: PRIMARY}}
+            //   ios_backgroundColor={WHITE}
+            //   onValueChange={e => changeStatusDarkMode(e)}
+            //   value={isDarkMode}
+            //   style={styles.switch}
+            // />
             <AntDesign name="right" size={14} />
           )}
         </Block>

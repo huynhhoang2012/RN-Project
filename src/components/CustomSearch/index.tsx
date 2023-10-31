@@ -11,6 +11,7 @@ import {
 import {Path, Svg} from 'react-native-svg';
 import styles from './styles';
 import Button from '@components/Button';
+import {fonts} from '@assets/fonts';
 
 type Props = {
   onChange: (e: string) => void;
@@ -138,7 +139,7 @@ const CustomSearch = (props: Props) => {
             ref={searchTextInput}
             onFocus={focusTextInput}
             onBlur={blurTextInput}
-            style={[styles.searchInputStyle]}
+            style={[styles.searchInputStyle, fonts.FONT_BOLD]}
             placeholder={placeholder}
             placeholderTextColor={placeholderTextColor}
           />

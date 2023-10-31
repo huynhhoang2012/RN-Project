@@ -43,7 +43,6 @@ const SettingsScreen = () => {
   const isDarkMode = useAppSelector(state => state.general.darkMode);
 
   const changeStatusDarkMode = debounce(e => {
-    console.log(e);
     dispatch(generalAct.setDarkMode(e));
   }, 100);
 

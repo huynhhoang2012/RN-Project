@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
-    "ios": "react-native run-ios --port 8088 --simulator=\"iPhone 13 Pro\"",
+    "ios": "react-native run-ios --simulator=\"iPhone 13 Pro\"",
     "lint": "eslint .",
-    "start": "react-native start --port 8088",
+    "start": "react-native start",
     "test": "jest",
     "open-xcode": "xed -b ios",
     "preinstall": "node ./scripts/pre-install",

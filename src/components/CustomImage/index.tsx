@@ -4,6 +4,7 @@ import Block from '../Block';
 import {BLACK} from '@assets/colors';
 import FastImage from 'react-native-fast-image';
 import {styles} from './styles';
+import {avatar} from '@assets/images';
 
 interface Props {
   source?: any;
@@ -42,7 +43,7 @@ const CustomImage: React.FC<Props> = props => {
       ) : (
         <ImageBase
           style={{width: 30, height: 30}}
-          source={emptyImage || require('../../assets/images/avatar.png')}
+          source={emptyImage || avatar}
         />
       )}
     </Block>

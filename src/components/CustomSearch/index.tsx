@@ -4,6 +4,7 @@ import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {
   Animated,
   Easing,
+  Platform,
   TextInput,
   TouchableOpacity,
   View,
@@ -65,7 +66,10 @@ const CustomSearch = (props: Props) => {
     [width],
   );
 
-  const memoizedTextInputOnBlurWidth = useMemo(() => width - 32, [width]);
+  const memoizedTextInputOnBlurWidth = useMemo(
+    () => width - (Platform.OS === 'ios' ? 32 : 20),
+    [width],
+  );
 
   const focusTextInput = useCallback(() => setSearchInputFocussed(true), []);
 
@@ -159,6 +163,7 @@ const CustomSearch = (props: Props) => {
             {
               opacity: cancelTextOpacity,
             },
+            fonts.FONT_MEDIUM,
           ]}>
           Cancel
         </Animated.Text>

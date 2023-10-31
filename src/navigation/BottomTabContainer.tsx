@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     backgroundColor: WHITE,
-    height: Platform.OS === 'ios' ? 85 : 65,
+    height: Platform.OS === 'ios' ? 85 : 200,
   },
   viewButtonTab: {
     position: 'absolute',

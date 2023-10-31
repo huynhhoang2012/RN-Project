@@ -11,7 +11,7 @@ export default StyleSheet.create({
   },
   buttonSetting: {
     paddingHorizontal: 20,
-    paddingVertical: 20,
+    // paddingVertical: 20,
     backgroundColor: WHITE,
     borderRadius: 6,
     shadowColor: '#000',
@@ -25,6 +25,7 @@ export default StyleSheet.create({
     marginTop: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    minHeight: 60,
   },
   viewLeftItem: {
     alignItems: 'center',
@@ -34,5 +35,8 @@ export default StyleSheet.create({
   titleItem: {
     marginLeft: 10,
     fontSize: 14,
+  },
+  switch: {
+    transform: [{scaleX: 0.7}, {scaleY: 0.7}],
   },
 });

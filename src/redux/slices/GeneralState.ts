@@ -5,6 +5,7 @@ const initialState: GeneralState = {
   showModalGlobal: false,
   showModalLoading: false,
   statusNetworking: false,
+  darkMode: false,
 };
 
 const GeneralSlice = createSlice({
@@ -20,12 +21,19 @@ const GeneralSlice = createSlice({
     setStatusNetworking(state, action: PayloadAction<boolean>) {
       state.statusNetworking = action.payload;
     },
+    setDarkMode(state, action: PayloadAction<boolean>) {
+      state.darkMode = action.payload;
+    },
   },
 });
 
 //actions
-export const {setStatusModalGlobal, setLoading, setStatusNetworking} =
-  GeneralSlice.actions;
+export const {
+  setStatusModalGlobal,
+  setLoading,
+  setStatusNetworking,
+  setDarkMode,
+} = GeneralSlice.actions;
 
 //reducers
 export default GeneralSlice.reducer;

@@ -56,9 +56,7 @@ const SignUp = () => {
             repeatPassword: '',
           }}
           validationSchema={signUpSchema}
-          onSubmit={values => {
-            console.log(values);
-          }}>
+          onSubmit={values => {}}>
           {({
             handleChange,
             handleBlur,

@@ -1,6 +1,7 @@
 import {View, ViewStyle} from 'react-native';
 import React from 'react';
 import styles from './styles';
+import PropTypes from 'prop-types';
 
 type BlockProps = {
   children?: React.ReactNode;
@@ -9,6 +10,8 @@ type BlockProps = {
   pt?: number;
   pr?: number;
   pb?: number;
+  px?: number;
+  py?: number;
   style?: ViewStyle | ViewStyle[];
   flex?: number | boolean;
   row?: boolean;
@@ -30,6 +33,8 @@ const Block = (props: BlockProps) => {
     pt,
     pr,
     pb,
+    px,
+    py,
     style,
     flex,
     row,
@@ -53,6 +58,8 @@ const Block = (props: BlockProps) => {
     pr && {paddingRight: pr},
     pt && {paddingTop: pt},
     pb && {paddingBottom: pb},
+    px && {paddingHorizontal: px},
+    py && {paddingVertical: py},
     ma && {margin: ma},
     ml && {marginLeft: ml},
     mr && {marginRight: mr},
@@ -69,5 +76,21 @@ const Block = (props: BlockProps) => {
     </View>
   );
 };
+
+// Block.propTypes = {
+//   placeholder: PropTypes.string,
+//   placeholderTextColor: PropTypes.string,
+//   onChange: PropTypes.func.isRequired,
+//   value: PropTypes.string.isRequired,
+//   onSearchClear: PropTypes.func,
+// };
+
+// Block.defaultProps = {
+//   placeholder: 'Search',
+//   placeholderTextColor: null,
+//   onChange: () => {},
+//   value: '',
+//   onSearchClear: () => {},
+// };
 
 export default Block;

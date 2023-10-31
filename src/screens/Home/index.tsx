@@ -1,14 +1,24 @@
 import Block from '@components/Block';
 import CustomText from '@components/CustomText';
 import Header from '@components/Header';
-import React from 'react';
+import React, {useState} from 'react';
 import styles from './styles';
+import CustomSearch from '@components/CustomSearch';
+import {useSafeAreaInsetsCustom} from '@hooks/useSafeAreaInsetsCustom';
 
 const HomeScreen = () => {
+  const [input, setInput] = useState<string>();
   return (
-    <Block style={styles.container}>
-      <Header title="Home" />
-      <CustomText>HomeScreen</CustomText>
+    <Block
+      style={[styles.container, {paddingTop: useSafeAreaInsetsCustom().top}]}>
+      {/* <Header title="Home" /> */}
+      <CustomSearch
+        value={input}
+        onChange={(e: string) => setInput(e)}
+        onSearchClear={() => setInput('')}
+        placeholder="Search ..."
+      />
+      <CustomText light>Home Screen</CustomText>
     </Block>
   );
 };

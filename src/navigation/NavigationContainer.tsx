@@ -17,7 +17,7 @@ function MyStack() {
     <>
       <NavigationContainer ref={navigationRef}>
         <Stack.Navigator
-          initialRouteName={'OnBoarding'}
+          initialRouteName={'BottomTab'}
           screenOptions={{
             headerShown: false,
           }}>

@@ -13,8 +13,6 @@ const DeviceSettings = () => {
     state => state.general.statusNetworking,
   );
 
-  console.log(statusNetworking);
-
   useEffect(() => {
     const unsubscribe = NetInfo.addEventListener(result => {
       dispatch(setStatusNetworking(!!result.isConnected));

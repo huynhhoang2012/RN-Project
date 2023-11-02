@@ -35,4 +35,5 @@ export default StyleSheet.create({
     top: 0,
     alignItems: 'center',
   },
+  btnClose: {position: 'absolute', top: 5, right: 5},
 });

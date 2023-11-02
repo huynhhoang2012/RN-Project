@@ -9,6 +9,7 @@ import {navigationRef} from './NavigationService';
 import QRCodeScanner from '@screens/QRCodeScanner';
 import OnBoarding from '@screens/OnBoarding';
 import SignUp from '@screens/SignUp';
+import CalculatorScreen from '@screens/CalculatorScreen';
 
 const Stack = createStackNavigator();
 
@@ -26,6 +27,7 @@ function MyStack() {
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="SignUp" component={SignUp} />
           <Stack.Screen name="QRCodeScanner" component={QRCodeScanner} />
+          <Stack.Screen name="CalculatorScreen" component={CalculatorScreen} />
         </Stack.Navigator>
       </NavigationContainer>
       <GlobalModal />

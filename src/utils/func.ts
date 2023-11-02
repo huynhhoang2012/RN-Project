@@ -7,3 +7,7 @@ export function sum(a: number, b: number) {
 export function checkPlatform(platform: string) {
   return Platform.OS === platform;
 }
+
+export function formatNumber(number: number) {
+  return Number(number.toFixed(1)).toLocaleString();
+}

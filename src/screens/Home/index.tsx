@@ -6,9 +6,13 @@ import styles from './styles';
 import CustomSearch from '@components/CustomSearch';
 import {useSafeAreaInsetsCustom} from '@hooks/useSafeAreaInsetsCustom';
 import {Platform} from 'react-native';
+import Button from '@components/Button';
+import notifee from '@notifee/react-native';
+import {avatar} from '@assets/images';
 
 const HomeScreen = () => {
   const [input, setInput] = useState<string>();
+
   return (
     <Block
       style={[
@@ -16,7 +20,7 @@ const HomeScreen = () => {
         // eslint-disable-next-line react-native/no-inline-styles
         {
           paddingTop:
-            useSafeAreaInsetsCustom().top + Platform.OS === 'ios' ? 0 : 10,
+            useSafeAreaInsetsCustom().top + (Platform.OS === 'ios' ? 0 : 10),
         },
       ]}>
       {/* <Header title="Home" /> */}

@@ -27,7 +27,7 @@ const CustomImage: React.FC<Props> = props => {
       {checkEmpty && checkEmpty !== '' ? (
         <>
           <FastImage
-            style={[{backgroundColor: '#f4f4f4'}, style]}
+            style={[style]}
             source={source}
             onLoadEnd={() => setLoading(false)}
             onLoadStart={() => setLoading(true)}
@@ -50,4 +50,4 @@ const CustomImage: React.FC<Props> = props => {
   );
 };
 
-export default CustomImage;
+export default React.memo(CustomImage);

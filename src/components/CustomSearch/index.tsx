@@ -188,4 +188,4 @@ CustomSearch.defaultProps = {
   onSearchClear: () => {},
 };
 
-export default CustomSearch;
+export default React.memo(CustomSearch);

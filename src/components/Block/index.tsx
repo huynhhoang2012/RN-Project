@@ -77,20 +77,4 @@ const Block = (props: BlockProps) => {
   );
 };
 
-// Block.propTypes = {
-//   placeholder: PropTypes.string,
-//   placeholderTextColor: PropTypes.string,
-//   onChange: PropTypes.func.isRequired,
-//   value: PropTypes.string.isRequired,
-//   onSearchClear: PropTypes.func,
-// };
-
-// Block.defaultProps = {
-//   placeholder: 'Search',
-//   placeholderTextColor: null,
-//   onChange: () => {},
-//   value: '',
-//   onSearchClear: () => {},
-// };
-
-export default Block;
+export default React.memo(Block);

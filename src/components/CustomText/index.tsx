@@ -65,4 +65,4 @@ CustomText.defaultProps = {
   light: true,
 };
 
-export default CustomText;
+export default React.memo(CustomText);

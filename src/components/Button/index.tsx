@@ -34,4 +34,4 @@ const Button = (props: Props) => {
   );
 };
 
-export default Button;
+export default React.memo(Button);

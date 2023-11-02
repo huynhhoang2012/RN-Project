@@ -86,4 +86,4 @@ const CustomInput = (props: Props) => {
   );
 };
 
-export default CustomInput;
+export default React.memo(CustomInput);

@@ -23,4 +23,4 @@ const LoadingModal = () => {
   );
 };
 
-export default LoadingModal;
+export default React.memo(LoadingModal);

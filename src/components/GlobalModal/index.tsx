@@ -23,9 +23,7 @@ const GlobalModal = () => {
       <Block style={styles.container}>
         <Button style={styles.overlay} onPress={() => turnOffModal()} />
         <Block style={styles.modalView}>
-          <Button
-            onPress={() => turnOffModal()}
-            style={{position: 'absolute', top: 5, right: 5}}>
+          <Button onPress={() => turnOffModal()} style={styles.btnClose}>
             <AntDesign name="closecircle" size={18} />
           </Button>
           <CustomText>Global Modal</CustomText>
@@ -35,4 +33,4 @@ const GlobalModal = () => {
   );
 };
 
-export default GlobalModal;
+export default React.memo(GlobalModal);

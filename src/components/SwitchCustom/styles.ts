@@ -3,16 +3,16 @@ import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   container: {
-    width: 50,
-    height: 30,
+    width: 45,
+    height: 26,
     borderRadius: 50,
     alignItems: 'flex-start',
     justifyContent: 'center',
   },
   circle: {
     backgroundColor: WHITE,
-    width: 20,
-    height: 20,
+    width: 16,
+    height: 16,
     borderRadius: 50,
   },
 });

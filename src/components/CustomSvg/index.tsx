@@ -12,4 +12,4 @@ const CustomSvg = (props: Props) => {
   return <SvgXml xml={xml} width={width} height={height} />;
 };
 
-export default CustomSvg;
+export default React.memo(CustomSvg);

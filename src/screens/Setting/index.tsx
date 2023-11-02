@@ -1,20 +1,20 @@
+import {SVG_CALCULATOR} from '@assets/xml';
 import Block from '@components/Block';
 import Button from '@components/Button';
+import CustomSvg from '@components/CustomSvg';
 import CustomText from '@components/CustomText';
 import Header from '@components/Header';
+import SwitchCustom from '@components/SwitchCustom';
+import {useAppDispatch, useAppSelector} from '@hooks/useRedux';
 import {navigate} from '@navigation/NavigationService';
+import * as generalAct from '@redux/slices/GeneralState';
+import {debounce} from 'lodash';
 import React from 'react';
 import {FlatList} from 'react-native-gesture-handler';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import styles from './styles';
-import {Switch} from 'react-native';
-import {useAppDispatch, useAppSelector} from '@hooks/useRedux';
-import {PRIMARY, WHITE} from '@assets/colors';
-import {debounce} from 'lodash';
-import * as generalAct from '@redux/slices/GeneralState';
-import SwitchCustom from '@components/SwitchCustom';
 
 type typeListButtonSetting = {
   title: string;
@@ -36,6 +36,11 @@ const SettingsScreen = () => {
       icon: <MaterialIcons name="dark-mode" size={16} />,
       type: 'dark-mode',
     },
+    {
+      title: 'Calculator',
+      screen: 'CalculatorScreen',
+      icon: <CustomSvg xml={SVG_CALCULATOR} width={20} height={20} />,
+    },
   ];
 
   const dispatch = useAppDispatch();
@@ -43,7 +48,6 @@ const SettingsScreen = () => {
   const isDarkMode = useAppSelector(state => state.general.darkMode);
 
   const changeStatusDarkMode = debounce(e => {
-    console.log(e);
     dispatch(generalAct.setDarkMode(e));
   }, 100);
 

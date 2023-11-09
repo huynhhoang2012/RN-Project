@@ -64,7 +64,7 @@ const LoginScreen = () => {
     <Block style={styles.container}>
       <Block style={[styles.body, {marginTop: useSafeAreaInsetsCustom().top}]}>
         <Block flex middle center>
-          <CustomText testID={'testText'} style={styles.textTitle}>
+          <CustomText testID={'testText'} style={styles.textTitle} bold>
             Log In
           </CustomText>
         </Block>

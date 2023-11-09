@@ -2,8 +2,8 @@ import {SVG_EYE_VISIBLE} from '@assets/xml';
 import Block from '@components/Block';
 import Button from '@components/Button';
 import CustomText from '@components/CustomText';
-import React, {useState} from 'react';
-import {LayoutAnimation, Platform, UIManager, ViewStyle} from 'react-native';
+import React, {useRef, useState} from 'react';
+import {Animated, Easing, Platform, UIManager, ViewStyle} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
 import {SvgXml} from 'react-native-svg';
 import {styles} from './styles';
@@ -31,19 +31,31 @@ const CustomInput = (props: Props) => {
   const {style, isPassword, value, onChange, label, name, errors, touched} =
     props;
 
+  const positionLabel = useRef(new Animated.Value(0)).current;
+
   const [hidePassword, setHidePassword] = useState(isPassword);
 
-  const [isFocused, setIsFocused] = useState<boolean>(false);
-
   const handleFocus = () => {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-    setIsFocused(true);
+    Animated.timing(positionLabel, {
+      toValue: -7,
+      duration: 200,
+      useNativeDriver: false,
+      easing: Easing.linear,
+    }).start();
   };
+
   const handleBlurInput = () => {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-    setIsFocused(false);
-    // handleBlur();
+    if (value?.length === 0) {
+      Animated.timing(positionLabel, {
+        toValue: 18,
+        duration: 200,
+        useNativeDriver: false,
+        easing: Easing.linear,
+      }).start();
+    }
   };
+
+  console.log(positionLabel);
 
   return (
     <>
@@ -52,12 +64,9 @@ const CustomInput = (props: Props) => {
           style,
           errors[name] && touched[name] && styles.borderErrorInput,
         ]}>
-        {isFocused && (
-          <CustomText style={styles.labelFocused}>{label}</CustomText>
-        )}
-        {value?.length === 0 && !isFocused && (
-          <CustomText style={styles.labelBlur}>{label}</CustomText>
-        )}
+        <Animated.Text style={[styles.labelText, {top: positionLabel}]}>
+          {label}
+        </Animated.Text>
         <TextInput
           value={value}
           onChangeText={onChange}

@@ -15,8 +15,7 @@ const HomeScreen = () => {
         styles.container,
         // eslint-disable-next-line react-native/no-inline-styles
         {
-          paddingTop:
-            useSafeAreaInsetsCustom().top + Platform.OS === 'ios' ? 0 : 10,
+          paddingTop: useSafeAreaInsetsCustom().top,
         },
       ]}>
       {/* <Header title="Home" /> */}

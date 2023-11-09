@@ -36,6 +36,11 @@ const SettingsScreen = () => {
       icon: <MaterialIcons name="dark-mode" size={16} />,
       type: 'dark-mode',
     },
+    {
+      title: 'Login',
+      screen: 'Login',
+      icon: <MaterialCommunityIcons name="login" size={16} />,
+    },
   ];
 
   const dispatch = useAppDispatch();

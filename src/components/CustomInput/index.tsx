@@ -37,7 +37,7 @@ const CustomInput = (props: Props) => {
 
   const handleFocus = () => {
     Animated.timing(positionLabel, {
-      toValue: -7,
+      toValue: -10,
       duration: 200,
       useNativeDriver: false,
       easing: Easing.linear,
@@ -54,8 +54,6 @@ const CustomInput = (props: Props) => {
       }).start();
     }
   };
-
-  console.log(positionLabel);
 
   return (
     <>

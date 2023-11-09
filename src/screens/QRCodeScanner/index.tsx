@@ -2,13 +2,19 @@ import {WHITE} from '@assets/colors';
 import Button from '@components/Button';
 import Header from '@components/Header';
 import React, {useRef, useState} from 'react';
-import {Keyboard} from 'react-native';
+import {Keyboard, LayoutAnimation, Platform, UIManager} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
 import QRCode from 'react-native-qrcode-svg';
 import Feather from 'react-native-vector-icons/Feather';
 import styles from './styles';
 import Block from '@components/Block';
 import CustomText from '@components/CustomText';
+
+if (Platform.OS === 'android') {
+  if (UIManager.setLayoutAnimationEnabledExperimental) {
+    UIManager.setLayoutAnimationEnabledExperimental(true);
+  }
+}
 
 const tabs = [
   {id: 1, title: 'Scanner', type: 'scanner'},
@@ -20,6 +26,7 @@ const QRCodeScanner = () => {
   const [tabActive, setTabActive] = useState(tabs[0]);
   const [valueGenerator, setValueGenerator] = useState<string>('');
   const [isGenerator, setIsGenerator] = useState<boolean>(false);
+
   const _renderTab = () => {
     return (
       <Block style={styles.containerTab}>
@@ -30,6 +37,9 @@ const QRCodeScanner = () => {
               tabActive.id === item.id ? styles.itemTabsActive : styles.itemTabs
             }
             onPress={() => {
+              LayoutAnimation.configureNext(
+                LayoutAnimation.Presets.easeInEaseOut,
+              );
               setTabActive(item);
             }}>
             <CustomText

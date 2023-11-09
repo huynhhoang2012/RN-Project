@@ -52,6 +52,7 @@ const CustomText = (props: CustomTextProps) => {
     medium && fonts.FONT_MEDIUM,
     regular && fonts.FONT_REGULAR,
     semiBold && fonts.FONT_SEMIBOLD,
+    {flexShrink: 1},
     style,
   ];
   return (

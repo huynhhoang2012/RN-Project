@@ -12,7 +12,9 @@
     "preinstall": "node ./scripts/pre-install",
     "postinstall": "node ./scripts/post-install",
     "pod-install": "cd ios && pod install && cd ../",
-    "clean:android": "cd android && ./gradlew clean && cd ../"
+    "clean:android": "cd android && ./gradlew clean && cd ../",
+    "build:apk": "cd android && ./gradlew app:assembleRelease && cd ../",
+    "build:adb": "cd android && ./gradlew bundleRelease  && cd ../"
   },
   "dependencies": {
     "@react-native-community/netinfo": "^9.4.1",

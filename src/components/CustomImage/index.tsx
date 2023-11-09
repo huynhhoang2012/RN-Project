@@ -5,6 +5,7 @@ import {BLACK} from '@assets/colors';
 import FastImage from 'react-native-fast-image';
 import {styles} from './styles';
 import {avatar} from '@assets/images';
+import Loading from '@components/Loading';
 
 interface Props {
   source?: any;
@@ -16,7 +17,9 @@ interface Props {
 
 const CustomImage: React.FC<Props> = props => {
   const {source, style, checkEmpty, pure, emptyImage} = props;
-  const [loading, setLoading] = useState<boolean | string>('nothing');
+  const [loading, setLoading] = useState<boolean>(false);
+
+  console.log(loading, source);
 
   if (pure) {
     return <ImageBase {...props} source={source} />;
@@ -36,7 +39,7 @@ const CustomImage: React.FC<Props> = props => {
 
           {loading && (
             <Block style={[style, styles.loading]} middle center>
-              <ActivityIndicator size="small" color={BLACK} />
+              <Loading />
             </Block>
           )}
         </>
